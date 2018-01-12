@@ -1,0 +1,127 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="DBH.ModuleGenerator" type="Module" version="01.00.00">
+      <friendlyName>DBH Module Generator</friendlyName>
+      <description>DBH Module Generator module</description>
+      <iconFile>~/images/DBH_Extension.gif</iconFile>
+      <owner>
+        <name>Information Technology Section</name>
+        <organization>Department of Beaches and Harbors</organization>
+        <url>http://bh.lacounty.gov</url>
+        <email>dhoang@bh.lacounty.gov</email>
+      </owner>
+      <license src="License.txt"></license>
+      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">07.00.02</dependency>
+      </dependencies>
+
+      <components>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DBH Module Generator</moduleName>
+            <foldername>DBH/ModuleGenerator</foldername>
+            <businessControllerClass>DBH.ModuleGenerator.Components.FeatureController</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature>IPortable</supportedFeature>
+              <supportedFeature>ISearchable</supportedFeature>
+              <supportedFeature>IUpgradeable</supportedFeature>
+            </supportedFeatures>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DBH Module Generator</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/DBH/ModuleGenerator/CreateModule.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>EditDepartment</controlKey>
+                    <controlSrc>DesktopModules/DBH/ModuleGenerator/EditDepartment.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit Department</controlTitle>
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                    <supportsPopUps>True</supportsPopUps>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DesktopModules/DBH/ModuleGenerator/Settings.ascx</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Module Generator Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+          <eventMessage>
+            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+            <processorCommand>UpgradeModule</processorCommand>
+            <attributes>
+              <businessControllerClass>DBH.ModuleGenerator.Components.FeatureController, ModuleGenerator</businessControllerClass>
+              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
+            </attributes>
+          </eventMessage>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>DBH.ModuleGenerator.dll</name>
+              <path>bin</path>
+            </assembly>
+          </assemblies>
+        </component>
+        <component type="File">
+          <files>
+            <basePath>DesktopModules\DBH\ModuleGenerator</basePath>
+            <file>
+              <path>App_LocalResources</path>
+              <name>CreateModule.ascx.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>EditDepartment.ascx.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>Settings.ascx.resx</name>
+            </file>
+            <file>
+              <name>CreateModule.ascx</name>
+            </file>
+            <file>
+              <name>EditDepartment.ascx</name>
+            </file>
+            <file>
+              <name>Settings.ascx</name>
+            </file>
+            <file>
+              <name>Department.xml</name>
+            </file>
+            <file>
+              <name>License.txt</name>
+            </file>
+            <file>
+              <name>ReleaseNotes.txt</name>
+            </file>
+          </files>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

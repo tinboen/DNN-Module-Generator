@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D61A32C-0F21-453F-A981-BD8E5A3A5304}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DBH.ModuleGenerator</RootNamespace>
+    <AssemblyName>DBH.ModuleGenerator</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetNuke, Version=7.0.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.WebUtility, Version=4.2.1.783, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DotNetNuke.WebUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\FeatureController.cs" />
+    <Compile Include="Components\DepartmentInfo.cs" />
+    <Compile Include="EditDepartment.ascx.cs">
+      <DependentUpon>EditDepartment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditDepartment.ascx.designer.cs">
+      <DependentUpon>EditDepartment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.ascx.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings.ascx.designer.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateModule.ascx.cs">
+      <DependentUpon>CreateModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateModule.ascx.designer.cs">
+      <DependentUpon>CreateModule.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Components\CodeEditor\lib\codemirror.css" />
+    <Content Include="Components\CodeEditor\lib\codemirror.js" />
+    <Content Include="Components\CodeEditor\lib\util\closetag.js" />
+    <Content Include="Components\CodeEditor\lib\util\dialog.css" />
+    <Content Include="Components\CodeEditor\lib\util\dialog.js" />
+    <Content Include="Components\CodeEditor\lib\util\foldcode.js" />
+    <Content Include="Components\CodeEditor\lib\util\formatting.js" />
+    <Content Include="Components\CodeEditor\lib\util\javascript-hint.js" />
+    <Content Include="Components\CodeEditor\lib\util\loadmode.js" />
+    <Content Include="Components\CodeEditor\lib\util\match-highlighter.js" />
+    <Content Include="Components\CodeEditor\lib\util\multiplex.js" />
+    <Content Include="Components\CodeEditor\lib\util\overlay.js" />
+    <Content Include="Components\CodeEditor\lib\util\pig-hint.js" />
+    <Content Include="Components\CodeEditor\lib\util\runmode.js" />
+    <Content Include="Components\CodeEditor\lib\util\search.js" />
+    <Content Include="Components\CodeEditor\lib\util\searchcursor.js" />
+    <Content Include="Components\CodeEditor\lib\util\simple-hint.css" />
+    <Content Include="Components\CodeEditor\lib\util\simple-hint.js" />
+    <Content Include="Components\CodeEditor\mode\clike\clike.js" />
+    <Content Include="Components\CodeEditor\mode\clike\index.html" />
+    <Content Include="Components\CodeEditor\mode\clike\scala.html" />
+    <Content Include="Components\CodeEditor\mode\clojure\clojure.js" />
+    <Content Include="Components\CodeEditor\mode\clojure\index.html" />
+    <Content Include="Components\CodeEditor\mode\coffeescript\coffeescript.js" />
+    <Content Include="Components\CodeEditor\mode\coffeescript\index.html" />
+    <Content Include="Components\CodeEditor\mode\css\css.js" />
+    <Content Include="Components\CodeEditor\mode\css\index.html" />
+    <Content Include="Components\CodeEditor\mode\diff\diff.js" />
+    <Content Include="Components\CodeEditor\mode\diff\index.html" />
+    <Content Include="Components\CodeEditor\mode\ecl\ecl.js" />
+    <Content Include="Components\CodeEditor\mode\ecl\index.html" />
+    <Content Include="Components\CodeEditor\mode\erlang\erlang.js" />
+    <Content Include="Components\CodeEditor\mode\erlang\index.html" />
+    <Content Include="Components\CodeEditor\mode\gfm\gfm.js" />
+    <Content Include="Components\CodeEditor\mode\gfm\index.html" />
+    <Content Include="Components\CodeEditor\mode\go\go.js" />
+    <Content Include="Components\CodeEditor\mode\go\index.html" />
+    <Content Include="Components\CodeEditor\mode\groovy\groovy.js" />
+    <Content Include="Components\CodeEditor\mode\groovy\index.html" />
+    <Content Include="Components\CodeEditor\mode\haskell\haskell.js" />
+    <Content Include="Components\CodeEditor\mode\haskell\index.html" />
+    <Content Include="Components\CodeEditor\mode\htmlembedded\htmlembedded.js" />
+    <Content Include="Components\CodeEditor\mode\htmlembedded\index.html" />
+    <Content Include="Components\CodeEditor\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="Components\CodeEditor\mode\htmlmixed\index.html" />
+    <Content Include="Components\CodeEditor\mode\javascript\index.html" />
+    <Content Include="Components\CodeEditor\mode\javascript\javascript.js" />
+    <Content Include="Components\CodeEditor\mode\jinja2\index.html" />
+    <Content Include="Components\CodeEditor\mode\jinja2\jinja2.js" />
+    <Content Include="Components\CodeEditor\mode\less\index.html" />
+    <Content Include="Components\CodeEditor\mode\less\less.js" />
+    <Content Include="Components\CodeEditor\mode\lua\index.html" />
+    <Content Include="Components\CodeEditor\mode\lua\lua.js" />
+    <Content Include="Components\CodeEditor\mode\markdown\index.html" />
+    <Content Include="Components\CodeEditor\mode\markdown\markdown.js" />
+    <Content Include="Components\CodeEditor\mode\mysql\index.html" />
+    <Content Include="Components\CodeEditor\mode\mysql\mysql.js" />
+    <Content Include="Components\CodeEditor\mode\ntriples\index.html" />
+    <Content Include="Components\CodeEditor\mode\ntriples\ntriples.js" />
+    <Content Include="Components\CodeEditor\mode\pascal\index.html" />
+    <Content Include="Components\CodeEditor\mode\pascal\pascal.js" />
+    <Content Include="Components\CodeEditor\mode\perl\index.html" />
+    <Content Include="Components\CodeEditor\mode\perl\perl.js" />
+    <Content Include="Components\CodeEditor\mode\php\index.html" />
+    <Content Include="Components\CodeEditor\mode\php\php.js" />
+    <Content Include="Components\CodeEditor\mode\pig\index.html" />
+    <Content Include="Components\CodeEditor\mode\pig\pig.js" />
+    <Content Include="Components\CodeEditor\mode\plsql\index.html" />
+    <Content Include="Components\CodeEditor\mode\plsql\plsql.js" />
+    <Content Include="Components\CodeEditor\mode\properties\index.html" />
+    <Content Include="Components\CodeEditor\mode\properties\properties.js" />
+    <Content Include="Components\CodeEditor\mode\python\index.html" />
+    <Content Include="Components\CodeEditor\mode\python\LICENSE.txt" />
+    <Content Include="Components\CodeEditor\mode\python\python.js" />
+    <Content Include="Components\CodeEditor\mode\rpm\changes\changes.js" />
+    <Content Include="Components\CodeEditor\mode\rpm\changes\index.html" />
+    <Content Include="Components\CodeEditor\mode\rpm\spec\index.html" />
+    <Content Include="Components\CodeEditor\mode\rpm\spec\spec.css" />
+    <Content Include="Components\CodeEditor\mode\rpm\spec\spec.js" />
+    <Content Include="Components\CodeEditor\mode\rst\index.html" />
+    <Content Include="Components\CodeEditor\mode\rst\rst.js" />
+    <Content Include="Components\CodeEditor\mode\ruby\index.html" />
+    <Content Include="Components\CodeEditor\mode\ruby\ruby.js" />
+    <Content Include="Components\CodeEditor\mode\rust\index.html" />
+    <Content Include="Components\CodeEditor\mode\rust\rust.js" />
+    <Content Include="Components\CodeEditor\mode\r\index.html" />
+    <Content Include="Components\CodeEditor\mode\r\r.js" />
+    <Content Include="Components\CodeEditor\mode\scheme\index.html" />
+    <Content Include="Components\CodeEditor\mode\scheme\scheme.js" />
+    <Content Include="Components\CodeEditor\mode\shell\index.html" />
+    <Content Include="Components\CodeEditor\mode\shell\shell.js" />
+    <Content Include="Components\CodeEditor\mode\smalltalk\index.html" />
+    <Content Include="Components\CodeEditor\mode\smalltalk\smalltalk.js" />
+    <Content Include="Components\CodeEditor\mode\smarty\index.html" />
+    <Content Include="Components\CodeEditor\mode\smarty\smarty.js" />
+    <Content Include="Components\CodeEditor\mode\sparql\index.html" />
+    <Content Include="Components\CodeEditor\mode\sparql\sparql.js" />
+    <Content Include="Components\CodeEditor\mode\stex\index.html" />
+    <Content Include="Components\CodeEditor\mode\stex\stex.js" />
+    <Content Include="Components\CodeEditor\mode\stex\test.html" />
+    <Content Include="Components\CodeEditor\mode\tiddlywiki\index.html" />
+    <Content Include="Components\CodeEditor\mode\tiddlywiki\tiddlywiki.css" />
+    <Content Include="Components\CodeEditor\mode\tiddlywiki\tiddlywiki.js" />
+    <Content Include="Components\CodeEditor\mode\tiki\index.html" />
+    <Content Include="Components\CodeEditor\mode\tiki\tiki.css" />
+    <Content Include="Components\CodeEditor\mode\tiki\tiki.js" />
+    <Content Include="Components\CodeEditor\mode\vbscript\index.html" />
+    <Content Include="Components\CodeEditor\mode\vbscript\vbscript.js" />
+    <Content Include="Components\CodeEditor\mode\velocity\index.html" />
+    <Content Include="Components\CodeEditor\mode\velocity\velocity.js" />
+    <Content Include="Components\CodeEditor\mode\verilog\index.html" />
+    <Content Include="Components\CodeEditor\mode\verilog\verilog.js" />
+    <Content Include="Components\CodeEditor\mode\xml\index.html" />
+    <Content Include="Components\CodeEditor\mode\xml\xml.js" />
+    <Content Include="Components\CodeEditor\mode\xquery\index.html" />
+    <Content Include="Components\CodeEditor\mode\xquery\test\index.html" />
+    <Content Include="Components\CodeEditor\mode\xquery\test\testBase.js" />
+    <Content Include="Components\CodeEditor\mode\xquery\test\testEmptySequenceKeyword.js" />
+    <Content Include="Components\CodeEditor\mode\xquery\test\testMultiAttr.js" />
+    <Content Include="Components\CodeEditor\mode\xquery\test\testNamespaces.js" />
+    <Content Include="Components\CodeEditor\mode\xquery\test\testProcessingInstructions.js" />
+    <Content Include="Components\CodeEditor\mode\xquery\test\testQuotes.js" />
+    <Content Include="Components\CodeEditor\mode\xquery\xquery.js" />
+    <Content Include="Components\CodeEditor\mode\yaml\index.html" />
+    <Content Include="Components\CodeEditor\mode\yaml\yaml.js" />
+    <Content Include="DepartmentList.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Documentation\Documentation.css" />
+    <Content Include="Documentation\Documentation.html" />
+    <Content Include="EditDepartment.ascx" />
+    <Content Include="Images\icon.png" />
+    <Content Include="License.txt" />
+    <Content Include="Images\logo.png" />
+    <Content Include="module.css" />
+    <Content Include="ModuleControl.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ReleaseNotes.txt" />
+    <Content Include="Settings.ascx" />
+    <Content Include="CreateModule.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuleGenerator.dnn">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BuildScripts\ModulePackage.targets" />
+    <Content Include="BuildScripts\MSBuild.Community.Tasks.Targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\CreateModule.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Settings.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\Module Generator User Manual.docx" />
+    <Content Include="Documentation\Module Generator User Manual.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuleGenerator.docx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Templates\Zip\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\EditDepartment.ascx.resx" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <Extension>zip</Extension>
+    <DNNFileName>ModuleGenerator</DNNFileName>
+    <PackageName>ModuleGenerator</PackageName>
+    <MSBuildCommunityTasksPath>$(SolutionDir)\BuildScripts</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+  <Import Project="BuildScripts\ModulePackage.Targets" />
+  <Target Name="AfterBuild" DependsOnTargets="PackageModule">
+  </Target>
+</Project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" standalone="yes"?>
+<Root>
+  <Field Department="Department of Beaches and Harbors" OwnerFolder="DBH" RootNamespace="DBH" OwnerName="Information Technology Section" OwnerOrganization="Department of Beaches and Harbors" OwnerWebsite="http://beaches.lacounty.gov/" OwnerEmail="dhoang@bh.lacounty.gov" IconFile="~/images/DBH_Extension.gif" />
+  <Field Department="Internal Services Department" OwnerFolder="ISD" RootNamespace="CAB" OwnerName="Customer Applications Branch" OwnerOrganization="Internal Services Department" OwnerWebsite="http://isd.lacounty.gov" OwnerEmail="dhoang@bh.lacounty.gov" IconFile="~/images/ISD_Extension.gif" />
+  <Field Department="DotNetNuke" OwnerFolder="DNNCorp" RootNamespace="DNN.Modules" OwnerName="DNN Software" OwnerOrganization="DNN Software" OwnerWebsite="http://www.dnnsoftware.com" OwnerEmail="sales@dnnsoftware.com" IconFile="~/images/icon_extensions.gif" />
+</Root>
