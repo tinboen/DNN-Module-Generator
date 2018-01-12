@@ -1,4 +1,4 @@
-/*
+﻿/*
 ' Copyright (c) 2018 Department of Beaches and Harbors
 ' All rights reserved.
 ' 
@@ -9,12 +9,6 @@
 ' DEALINGS IN THE SOFTWARE.
 ' 
 */
-
-using System;
-using System.Web.Caching;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.ComponentModel.DataAnnotations;
-using DotNetNuke.Entities.Content;
 
 namespace DBH.ModuleGenerator.Components
 {
@@ -27,7 +21,16 @@ namespace DBH.ModuleGenerator.Components
         ///<summary>
         /// The string with the name of your object
         ///</summary>
-        public string DepartmentName { get; set; }
+        public string DepartmentName
+        {
+            get
+            {
+                if (DepartmentValue != "")
+                    return DepartmentValue.Split('|')[0];
+                else
+                    return "Department of Beaches and Harbors";
+            }
+        }
 
         ///<summary>
         /// The string with the Abbreviation of your Module
@@ -42,7 +45,7 @@ namespace DBH.ModuleGenerator.Components
             get
             {
                 if (DepartmentValue != "")
-                    return DepartmentValue.Split('|')[0];
+                    return DepartmentValue.Split('|')[1].Replace(" ", "");
                 else
                     return "DBH";
             }
@@ -51,12 +54,12 @@ namespace DBH.ModuleGenerator.Components
         ///<summary>
         /// The string with the Namespace of your Module
         ///</summary>
-        public string ModuleNamespace
+        public string RootNamespace
         {
             get
             {
                 if (DepartmentValue != "")
-                    return DepartmentValue.Split('|')[1];
+                    return DepartmentValue.Split('|')[2].Replace(" ", "");
                 else
                     return "DBH";
             }
@@ -70,7 +73,7 @@ namespace DBH.ModuleGenerator.Components
             get
             {
                 if (DepartmentValue != "")
-                    return DepartmentValue.Split('|')[2];
+                    return DepartmentValue.Split('|')[3];
                 else
                     return "Information Technology Section";
             }
@@ -85,7 +88,7 @@ namespace DBH.ModuleGenerator.Components
             get
             {
                 if (DepartmentValue != "")
-                    return DepartmentValue.Split('|')[3];
+                    return DepartmentValue.Split('|')[4];
                 else
                     return "Department of Beaches and Harbors";
             }
@@ -94,12 +97,12 @@ namespace DBH.ModuleGenerator.Components
         ///<summary>
         /// A string with the Owner Url of the module
         ///</summary>
-        public string OwnerUrl
+        public string OwnerWebsite
         {
             get
             {
                 if (DepartmentValue != "")
-                    return DepartmentValue.Split('|')[4];
+                    return DepartmentValue.Split('|')[5];
                 else
                     return "http://bh.lacounty.gov";
             }
@@ -114,11 +117,145 @@ namespace DBH.ModuleGenerator.Components
             get
             {
                 if (DepartmentValue != "")
-                    return DepartmentValue.Split('|')[5];
+                    return DepartmentValue.Split('|')[6];
                 else
                     return "dhoang@bh.lacounty.gov";
             }
         }
+
+        ///<summary>
+        /// A string with the URL of the extension icon of the department module
+        ///</summary>
+        public string IconFile
+        {
+            get
+            {
+                if (DepartmentValue != "")
+                    return DepartmentValue.Split('|')[7];
+                else
+                    return "~/images/DBH_Extension.gif";
+            }
+        }
+        
+        ///<summary>
+        /// The current ModuleId of where the template was stored
+        ///</summary>
+        public int ModuleId { get; set; }
+
+        ///<summary>
+        /// The string with the Language of your new Module
+        ///</summary>
+        public string Language { get; set; }
+
+        ///<summary>
+        /// The string with the Template of your new Module
+        ///</summary>
+        public string Template { get; set; }
+
+        ///<summary>
+        /// The string with the new Project Folder of your object, will be used as module folder
+        ///</summary>
+        public string ProjectFolder { get; set; }
+
+        ///<summary>
+        /// The string with the new Module name of your object
+        ///</summary>
+        public string ModuleName { get; set; }
+
+        ///<summary>
+        /// The string with the new Module Friendly name of your object
+        ///</summary>
+        public string ModuleFriendlyName { get; set; }
+
+        ///<summary>
+        /// The string with the new Module Description name of your object
+        ///</summary>
+        public string ModuleDescription { get; set; }
+
+        ///<summary>
+        /// The string with the new Module Abbreviation name of your object
+        ///</summary>
+        public string ModuleAbbreviation { get; set; }
+
+        
+
+        ///<summary>
+        /// The Desktop Module folder
+        ///</summary>
+        public string ModulePath
+        {
+            get
+            {
+                DotNetNuke.Entities.Modules.ModuleController modCtrl = new DotNetNuke.Entities.Modules.ModuleController();
+                if (ModuleId > 0)
+                    return System.Web.HttpContext.Current.Server.MapPath("~/DesktopModules/") + modCtrl.GetModule(ModuleId).DesktopModule.FolderName.Replace("/", "\\") + "\\";
+                else
+                    return "";
+            }
+        }
+        
+        ///<summary>
+        /// The Module Template Path of where the template was stored
+        ///</summary>
+        public string ModuleTemplatePath
+        {
+            get
+            {
+                return ModulePath + "Templates\\" + Language + "\\" + Template + "\\";
+            }
+        }
+
+        ///<summary>
+        /// The Zip Folder Path of where the Zip file was stored
+        ///</summary>
+        public string ZipPath
+        {
+            get
+            {
+                return ModulePath + "Templates\\Zip\\";
+            }
+        }
+
+        ///<summary>
+        /// The full Zip File Path of where the Zip file 
+        ///</summary>
+        public string ZipFilePath
+        {
+            get
+            {
+                return ModulePath + "Templates\\Zip\\" + ProjectFolder;
+            }
+        }
+
+        ///<summary>
+        /// The Target Folder with the new module will be created
+        ///</summary>
+        public string TargetFolder
+        {
+            get
+            {
+                if (ProjectFolder != "")
+                    return ".\\" + OwnerFolder + "\\" + ProjectFolder;
+                else
+                    return "";
+            }
+        }
+
+        ///<summary>
+        /// The Module Generator Path with the new module will be created
+        ///</summary>
+        public string ModuleGeneratorPath
+        {
+            get
+            {
+                DotNetNuke.Entities.Modules.ModuleController modCtrl = new DotNetNuke.Entities.Modules.ModuleController();
+                if (ProjectFolder != "")
+                    return System.Web.HttpContext.Current.Server.MapPath("~/DesktopModules/") + OwnerFolder + "\\" + ProjectFolder + "\\";
+                else
+                    return "";
+            }
+        }
+
 
 
     }

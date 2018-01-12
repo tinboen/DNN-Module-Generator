@@ -12,14 +12,17 @@
 
 using System.IO;
 using System.Collections.Generic;
-using DotNetNuke.Common;
-using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Entities.Content.Common;
-using DotNetNuke.Entities.Content;
-using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Services.Installer.Packages;
 using System;
+using System.Web.UI.WebControls;
+using System.Web;
+using System.Data;
+using DotNetNuke.Services.Search.Entities;
+using DotNetNuke.Services.Localization;
+using DotNetNuke.Common.Utilities;
+using System.Web.UI.HtmlControls;
+using DotNetNuke.Entities.Users;
+using System.Xml;
 
 namespace DBH.ModuleGenerator.Components
 {
@@ -40,12 +43,221 @@ namespace DBH.ModuleGenerator.Components
     /// Below you will find stubbed out implementations of each, uncomment and populate with your own data
     /// </summary>
     /// -----------------------------------------------------------------------------
-    public class FeatureController : IUpgradeable
+    public class FeatureController : ModuleSearchBase, IPortable, IUpgradeable
     {
         // feel free to remove any interfaces that you don't wish to use
         // (requires that you also update the .dnn manifest file)
 
+        #region Private Members
+
+        static string UserManual = "Module Generator User Manual.pdf";
+
+        #endregion
+
+        #region " Page Header Navigation "
+
+        public static void PopulateMenu(int ModuleId, UserInfo objUser, HttpRequest Request, HtmlGenericControl NavigationBar)
+        {
+            if (!objUser.IsSuperUser)
+                return;
+
+            DotNetNuke.Entities.Modules.ModuleController modCtrl = new ModuleController();
+            XmlDocument xDocument = new XmlDocument();
+            xDocument.Load(@HttpContext.Current.Server.MapPath("~/DesktopModules/") + modCtrl.GetModule(ModuleId).DesktopModule.FolderName + "\\ModuleControl.xml");
+            bool bFound = false;
+
+            foreach (XmlNode node in xDocument.GetElementsByTagName("Field"))
+            {
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                if (Request.QueryString["ctl"] == node.Attributes["value"].Value || (string.IsNullOrEmpty(Request.QueryString["ctl"]) && !bFound))
+                {
+                    // Indicates a successful or positive action
+                    li.Attributes.Add("class", "btn btn-success");
+                    bFound = true;
+                }
+                else
+                {
+                    // Secondary, outline button
+                    li.Attributes.Add("class", "btn btn-secondary");
+                }
+
+                NavigationBar.Controls.Add(li);
+
+                //var currentUrl = Globals.NavigateURL(this.TabId, this.Request.QueryString["ctl"], UrlUtils.GetQSParamsForNavigateURL());
+
+                HtmlGenericControl anchor = new HtmlGenericControl("a");
+                if (string.IsNullOrEmpty(node.Attributes["value"].Value))
+                {
+                    anchor.Attributes.Add("href", DotNetNuke.Common.Globals.NavigateURL(node.Attributes["value"].Value));
+                }
+                else
+                {
+                    if (node.Attributes["value"].Value == "Manual")
+                    {
+                        String strPathAndQuery = HttpContext.Current.Request.Url.PathAndQuery;
+                        String strUrl = HttpContext.Current.Request.Url.AbsoluteUri.Replace(strPathAndQuery, "/") + HttpContext.Current.Request.ApplicationPath;
+                        // Setup link to open a new window
+                        anchor.Attributes.Add("href", strUrl + "/DesktopModules/" + modCtrl.GetModule(ModuleId).DesktopModule.FolderName + "/Documentation/" + UserManual);
+                        anchor.Attributes.Add("Target", "_blank");
+                    }
+                    else
+                    {
+                        anchor.Attributes.Add("href", DotNetNuke.Common.Globals.NavigateURL(node.Attributes["value"].Value, "mid=" + ModuleId.ToString()));
+                    }
+                }
+                anchor.InnerText = node.Attributes["text"].Value;
+                li.Controls.Add(anchor);
+            }
+        }
+
+        #endregion
+
+        #region Populate Dropdownlist
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Reading the names of folders and Binding the Radio Buttons
+        /// Below is the method that reads the names of folders and then binds the same to the ASP.Net Radio Buttons Control
+        /// </summary>
+        /// -----------------------------------------------------------------------------
+        public static void LoadLanguages(int ModuleId, RadioButtonList optLanguage)
+        {
+
+            optLanguage.Items.Clear();
+            DotNetNuke.Entities.Modules.ModuleController modCtrl = new ModuleController();
+            string sModulePath = @HttpContext.Current.Server.MapPath("~/DesktopModules/") + modCtrl.GetModule(ModuleId).DesktopModule.FolderName + "\\";
+            var moduleTemplatePath = sModulePath + "Templates";
+            string[] folderList = Directory.GetDirectories(moduleTemplatePath);
+            foreach (string folderPath in folderList)
+            {
+                optLanguage.Items.Add(new ListItem(Path.GetFileName(folderPath)));
+            }
+            optLanguage.SelectedIndex = 0;
+        }
+
+        public static void LoadReadMe(int ModuleId, DropDownList cboTemplate, RadioButtonList optLanguage, Label lblDescription)
+        {
+            DotNetNuke.Entities.Modules.ModuleController modCtrl = new ModuleController();
+            string sModulePath = @HttpContext.Current.Server.MapPath("~/DesktopModules/") + modCtrl.GetModule(ModuleId).DesktopModule.FolderName + "\\";
+            var readMePath = sModulePath + "Templates\\" + optLanguage.SelectedValue + "\\" + cboTemplate.SelectedItem.Value + "\\readme.txt";
+            if (File.Exists(readMePath))
+            {
+                var readMe = Null.NullString;
+                TextReader tr = new StreamReader(readMePath);
+                readMe = tr.ReadToEnd();
+                tr.Close();
+                lblDescription.Text = readMe.Replace("\n", "<br/>");
+            }
+            else
+            {
+                lblDescription.Text = "";
+            }
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Reading the names of folders and Binding the Radio Buttons
+        /// Below is the method that reads the names of folders and then binds the same to the ASP.Net Radio Buttons Control
+        /// </summary>
+        /// -----------------------------------------------------------------------------
+        public static void LoadModuleTemplates(int ModuleId, DropDownList cboTemplate, RadioButtonList optLanguage, Label lblDescription)
+        {
+            cboTemplate.Items.Clear();
+            DotNetNuke.Entities.Modules.ModuleController modCtrl = new ModuleController();
+            string sModulePath = @HttpContext.Current.Server.MapPath("~/DesktopModules/") + modCtrl.GetModule(ModuleId).DesktopModule.FolderName + "\\";
+            var moduleTemplatePath = sModulePath + "Templates\\" + optLanguage.SelectedValue;
+            string[] folderList = Directory.GetDirectories(moduleTemplatePath);
+            foreach (string folderPath in folderList)
+            {
+                cboTemplate.Items.Add(new ListItem(Path.GetFileName(folderPath)));
+            }
+            cboTemplate.Items.Insert(0, new ListItem("<" + Localization.GetString("Not_Specified", Localization.SharedResourceFile) + ">", ""));
+            //if (cboTemplate.Items.FindByText("Module - User Control") != null)
+            //{
+            //    cboTemplate.Items.FindByText("Module - User Control").Selected = true;
+            //}
+            //else
+            //{
+            //    cboTemplate.SelectedIndex = 0;
+            //}
+            LoadReadMe(ModuleId, cboTemplate, optLanguage, lblDescription);
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Reading the XML file and Binding the DropDownList
+        /// Below is the method that reads the XML file into a Dataset object and then binds the same to the ASP.Net DropDownList Control
+        /// </summary>
+        /// -----------------------------------------------------------------------------
+        public static void PopulateDDL(int ModuleId, DropDownList DDL, string XML_File)
+        {
+            DotNetNuke.Entities.Modules.ModuleController modCtrl = new ModuleController();
+            string filePath = @HttpContext.Current.Server.MapPath("~/DesktopModules/") + modCtrl.GetModule(ModuleId).DesktopModule.FolderName + "\\" + XML_File;
+            using (DataSet ds = new DataSet())
+            {
+                ds.ReadXml(filePath);
+                DataTable dt = ds.Tables[0];
+                DataColumn col = new DataColumn("Value", typeof(string));
+                dt.Columns.Add(col);
+                foreach (DataRow row in dt.Rows)
+                {
+                    row["Value"] = row["Department"].ToString()
++ "|" + row["OwnerFolder"].ToString()
++ "|" + row["RootNamespace"].ToString()
++ "|" + row["OwnerName"].ToString()
++ "|" + row["OwnerOrganization"].ToString()
++ "|" + row["OwnerWebsite"].ToString()
++ "|" + row["OwnerEmail"].ToString()
++ "|" + row["IconFile"].ToString();
+                }
+                DDL.DataSource = dt;
+                DDL.DataTextField = "Department";
+                DDL.DataValueField = "Value";
+                DDL.DataBind();
+            }
+        }
+
+        #endregion
+
         #region Optional Interfaces
+
+        /// <summary>
+        /// Gets the modified search documents for the DNN search engine indexer.
+        /// </summary>
+        /// <param name="moduleInfo">The module information.</param>
+        /// <param name="beginDate">The begin date.</param>
+        /// <returns></returns>
+        public override IList<SearchDocument> GetModifiedSearchDocuments(ModuleInfo moduleInfo, DateTime beginDate)
+        {
+            var searchDocuments = new List<SearchDocument>();
+
+            return searchDocuments;
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// ExportModule implements the IPortable ExportModule Interface
+        /// </summary>
+        /// <param name="moduleId">The Id of the module to be exported</param>
+        /// -----------------------------------------------------------------------------
+        public string ExportModule(int ModuleID)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// ImportModule implements the IPortable ImportModule Interface
+        /// </summary>
+        /// <param name="moduleId">The Id of the module to be imported</param>
+        /// <param name="content">The content to be imported</param>
+        /// <param name="version">The version of the module to be imported</param>
+        /// <param name="userId">The Id of the user performing the import</param>
+        /// -----------------------------------------------------------------------------
+        public void ImportModule(int ModuleID, string Content, string Version, int UserID)
+        {
+            throw new NotImplementedException();
+        }
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -55,49 +267,25 @@ namespace DBH.ModuleGenerator.Components
         /// -----------------------------------------------------------------------------
         public string UpgradeModule(string Version)
         {
-            ////Fix icon and add "Development" to the DesktopModule taxonomy and associate it with this module
-            //if (Version == "01.00.00")
-            //{
-            //    var vocabularyId = -1;
-            //    var termId = -1;
-            //    var objTermController = DotNetNuke.Entities.Content.Common.Util.GetTermController();
-            //    var objTerms = objTermController.GetTermsByVocabulary("Module_Categories");
-            //    foreach (Term term in objTerms)
-            //    {
-            //        vocabularyId = term.VocabularyId;
-            //        if (term.Name == "Development")
-            //        {
-            //            termId = term.TermId;
-            //        }
-            //    }
-            //    if (termId == -1)
-            //    {
-            //        termId = objTermController.AddTerm(new Term(vocabularyId) { Name = "Development" });
-            //    }
-            //    var objTerm = objTermController.GetTerm(termId);
-
-            //    var portalID = -1;
-            //    Dictionary<string, string> HostSettings = HostController.Instance.GetSettingsDictionary();
-            //    if (HostSettings.ContainsKey("HostPortalId"))
-            //    {
-            //        portalID = int.Parse(HostSettings["HostPortalId"]);
-            //    }
-            //    if (portalID != -1)
-            //    {
-            //        var objDesktopModule = DesktopModuleController.GetDesktopModuleByModuleName("DBH.ModuleGenerator", portalID);
-            //        var objPackage = PackageController.GetPackage(objDesktopModule.PackageID);
-            //        objPackage.IconFile = "~/DesktopModules/DBH/ModuleGenerator/Images/icon.png";
-            //        PackageController.SavePackage(objPackage);
-
-            //        var objContentController = DotNetNuke.Entities.Content.Common.Util.GetContentController();
-            //        var objContent = objContentController.GetContentItem(objDesktopModule.ContentItemId);
-            //        objTermController.AddTermToContent(objTerm, objContent);
-            //    }
-            //}
-
-            return Version;
+            try
+            {
+                switch (Version)
+                {
+                    case "01.00.00":
+                        // run your custom code here
+                        return "success";
+                    default:
+                        return "success";
+                }
+            }
+            catch
+            {
+                return "failure";
+            }
         }
 
+
         #endregion
+
     }
 }
