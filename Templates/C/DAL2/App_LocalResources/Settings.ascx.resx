@@ -112,42 +112,24 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="ControlTitle_settings.Text" xml:space="preserve">
+    <value>$safeprojectname$ Settings</value>
   </data>
-  <data name="btnSubmit.Text" xml:space="preserve">
-    <value>Save</value>
+  <data name="lblSetting1.Help" xml:space="preserve">
+    <value>Put your value for Setting 1 here.</value>
   </data>
-  <data name="ControlTitle_edit.Text" xml:space="preserve">
-    <value>Edit Control for $safeprojectname$</value>
+  <data name="lblSetting1.Text" xml:space="preserve">
+    <value>Setting One</value>
   </data>
-  <data name="lblAssignedUser.Help" xml:space="preserve">
-    <value>Choose a user to assign this object to.</value>
+  <data name="lblSetting2.Help" xml:space="preserve">
+    <value>Put your value for Setting 2 here.</value>
   </data>
-  <data name="lblAssignedUser.Text" xml:space="preserve">
-    <value>Assigned User</value>
-  </data>
-  <data name="lblDescription.Help" xml:space="preserve">
-    <value>Enter a Description for your Item</value>
-  </data>
-  <data name="lblDescription.Text" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="lblName.Help" xml:space="preserve">
-    <value>Enter the Name for your Item</value>
-  </data>
-  <data name="lblName.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="BasicSettings.Text" xml:space="preserve">
-    <value>$safeprojectname$ Item Basic Settings</value>
-  </data>
-  <data name="ExpandAll.Text" xml:space="preserve">
-    <value>Expand All</value>
+  <data name="lblSetting2.Text" xml:space="preserve">
+    <value>Setting Two</value>
   </data>
 </root>
