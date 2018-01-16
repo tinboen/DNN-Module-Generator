@@ -111,7 +111,10 @@
               <name>Settings.ascx</name>
             </file>
             <file>
-              <name>Department.xml</name>
+              <name>DepartmentList.xml</name>
+            </file>
+            <file>
+              <name>ModuleControl.xml</name>
             </file>
             <file>
               <name>License.txt</name>

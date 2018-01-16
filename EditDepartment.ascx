@@ -33,6 +33,10 @@
                         <dnn:Label runat="server" ControlName="txtRootNamespace" ResourceKey="txtRootNamespace" />
                         <asp:TextBox ID="txtRootNamespace" runat="server" />
                     </div>
+                    <div class="dnnFormItem">
+                        <dnn:Label runat="server" ControlName="txtIconFile" ResourceKey="txtIconFile" />
+                        <asp:TextBox ID="txtIconFile" runat="server" />
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="dnnFormItem">
@@ -56,7 +60,6 @@
                     <div class="dnnFormItem">
                         <ul class="dnnActions dnnClear">
                             <li><asp:LinkButton runat="server" CssClass="dnnPrimaryAction" ID="cmdAddNewRecord" Resourcekey="cmdAddNewRecord" OnClick="cmdAddNewRecord_Click" /></li>
-                            <li><asp:LinkButton runat="server" CssClass="dnnSecondaryAction" ID="cmdCancel" Resourcekey="cmdCancel" OnClick="cmdCancel_Click" CausesValidation="False" /></li>
                         </ul>
                     </div>
                 </div>
@@ -92,6 +95,7 @@
                     <asp:BoundField DataField="OwnerOrganization" SortExpression="OwnerOrganization" HeaderText="Owner Organization" />
                     <asp:BoundField DataField="OwnerWebsite" SortExpression="OwnerWebsite" HeaderText="Owner Url" />
                     <asp:BoundField DataField="OwnerEmail" SortExpression="OwnerEmail" HeaderText="Owner Email" />
+                    <asp:BoundField DataField="IconFile" SortExpression="IconFile" HeaderText="Icon File" />
                 </Columns>
             </asp:GridView>
         </ContentTemplate>

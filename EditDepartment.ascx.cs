@@ -105,6 +105,7 @@ namespace DBH.ModuleGenerator
             string strOwnerOrganization = ((TextBox)(row.Cells[6].Controls[0])).Text;
             string strOwnerWebsite = ((TextBox)(row.Cells[7].Controls[0])).Text;
             string strOwnerEmail = ((TextBox)(row.Cells[8].Controls[0])).Text;
+            string strIconFile = ((TextBox)(row.Cells[9].Controls[0])).Text;
 
             //Reset the edit index.
             gvDepartment.EditIndex = -1;
@@ -121,6 +122,8 @@ namespace DBH.ModuleGenerator
             oDs.Tables[0].Rows[i]["OwnerOrganization"] = strOwnerOrganization;
             oDs.Tables[0].Rows[i]["OwnerWebsite"] = strOwnerWebsite;
             oDs.Tables[0].Rows[i]["OwnerEmail"] = strOwnerEmail;
+            oDs.Tables[0].Rows[i]["IconFile"] = strIconFile;
+            
             oDs.WriteXml(strXMLfile);
 
             //Bind data to the GridView control.
@@ -186,6 +189,8 @@ namespace DBH.ModuleGenerator
                     oDr["OwnerOrganization"] = txtOwnerOrganization.Text;
                     oDr["OwnerWebsite"] = txtOwnerWebsite.Text;
                     oDr["OwnerEmail"] = txtOwnerEmail.Text;
+                    oDr["IconFile"] = txtIconFile.Text;
+                    
                     oDs.Tables[0].Rows.Add(oDr);
                     oDs.WriteXml(strXMLfile);
                     BindGrid();
@@ -197,28 +202,6 @@ namespace DBH.ModuleGenerator
 
                 // return to main page
                 //Response.Redirect(Globals.NavigateURL(AddNewRecord, "COLUMN_NAME=" + ddlCOLUMN_NAME.SelectedValue, "mid=" + ModuleId.ToString()));
-            }
-            catch (Exception exc) //Module failed to load
-            {
-                Exceptions.ProcessModuleLoadException(this, exc);
-            }
-        }
-
-        /// -----------------------------------------------------------------------------
-        /// <summary>
-        /// cmdCancel_Click runs when the cancel button is clicked
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <history>
-        /// </history>
-        /// -----------------------------------------------------------------------------
-        protected void cmdCancel_Click(System.Object sender, System.EventArgs e)
-        {
-            try
-            {
-                //Response.Redirect(Globals.NavigateURL(PortalSettings.ActiveTab.TabID, "", "mid=" + ModuleId.ToString(), "Default.aspx"), true);
-                Response.Redirect(Globals.NavigateURL(PortalSettings.ActiveTab.TabID, ParentPage, "mid=" + ModuleId.ToString(), "Default.aspx"), true);
             }
             catch (Exception exc) //Module failed to load
             {
