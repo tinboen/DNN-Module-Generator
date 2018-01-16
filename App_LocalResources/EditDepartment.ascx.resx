@@ -259,7 +259,7 @@
     <value>Module Namespace</value>
   </data>
   <data name="txtOwnerEmail.Help" xml:space="preserve">
-    <value>Owner Email Address</value>
+    <value>Owner Email Address (format dhoang@bh.lacounty.gov)</value>
   </data>
   <data name="txtOwnerEmail.Text" xml:space="preserve">
     <value>Owner Email</value>
@@ -290,5 +290,11 @@
   </data>
   <data name="txtModuleName.Required" xml:space="preserve">
     <value>Module Name is required</value>
+  </data>
+  <data name="txtIconFile.Help" xml:space="preserve">
+    <value>Icon will be used for display module extension (format ~/images/DBH_Extension.gif)</value>
+  </data>
+  <data name="txtIconFile.Text" xml:space="preserve">
+    <value>Icon File</value>
   </data>
 </root>
