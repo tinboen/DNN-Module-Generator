@@ -5,4 +5,4 @@ For example, at Los Angeles County, there are 37 departments,
 at Department of Beaches and Harbors (DBH), developer will develop DNN modules at folder named DBH, 
 the Internal Services Department (ISD) will develop DNN modules at folder named IDS. 
 The DNN module name for the DBH could be different than the ISD, 
-therefor this module is developed to help developer to develop DNN modules better and faster.
+therefor this module is developed to help developer to develop DNN modules better and faster. User can add new customize modules to the template folder with more flexibility information.  For example, the module can include the common user role security, display menu items based on the user role, etc.
