@@ -60,11 +60,11 @@
                     </div>
                     <div class="dnnFormItem">
                         <dnn:label id="plLanguage" controlname="optLanguage" runat="server" />
-                        <asp:RadioButtonList ID="optLanguage" CssClass="dnnFormRadioButtons" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" AutoPostBack="True" />
+                        <asp:RadioButtonList ID="optLanguage" CssClass="dnnFormRadioButtons" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" AutoPostBack="True" OnSelectedIndexChanged="optLanguage_SelectedIndexChanged" />
                     </div>
                     <div class="dnnFormItem">
                         <dnn:label id="plTemplate" controlname="cboTemplate" runat="server" />
-                        <asp:DropDownList ID="cboTemplate" runat="server" AutoPostBack="True" />
+                        <asp:DropDownList ID="cboTemplate" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cboTemplate_SelectedIndexChanged" />
                     </div>
                 </div>
             </fieldset>
