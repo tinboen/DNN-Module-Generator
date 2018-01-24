@@ -87,7 +87,12 @@
                 </EmptyDataTemplate>
                 <Columns>
                     <asp:CommandField ShowEditButton="True" />
-                    <asp:CommandField ShowDeleteButton="True" />
+                    <asp:TemplateField HeaderText="">
+                        <ItemTemplate>
+                            <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
+                                OnClientClick="return confirm('Are you sure you want to delete this department?');" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="Department" SortExpression="Department" HeaderText="Department" />
                     <asp:BoundField DataField="OwnerFolder" SortExpression="OwnerFolder" HeaderText="Owner Folder" />
                     <asp:BoundField DataField="RootNamespace" SortExpression="RootNamespace" HeaderText="Module Namespace" />
